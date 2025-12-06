@@ -30,5 +30,7 @@ Route::get('/', function () {
 
 Route::controller(FrontendController::class)->group(function(){
     Route::get('/', 'home')->name('home');
+    Route::any('/user/login', 'user_login');
+    Route::any('/user/register', 'user_register')->name('user_register');
 });
 

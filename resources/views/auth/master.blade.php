@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Twitter -->
     <meta name="twitter:site" content="@themepixels">
@@ -38,6 +39,9 @@
 
     <!-- Starlight CSS -->
     <link href="{{ asset('backend/css/starlight.css') }}" rel="stylesheet">
+
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -47,6 +51,7 @@
     <script src="{{ asset('backend/lib/popper.js/popper.js') }}"></script>
     <script src="{{ asset('backend/lib/bootstrap/bootstrap.js') }}"></script>
     <script src="{{ asset('backend/lib/select2/js/select2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
       $(function(){
         'use strict';
@@ -56,6 +61,6 @@
         });
       });
     </script>
-
+    @yield('js')
   </body>
 </html>
