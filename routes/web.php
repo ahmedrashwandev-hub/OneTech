@@ -35,6 +35,7 @@ Route::controller(FrontendController::class)->group(function(){
 Route::controller(BackendController::class)->group(function(){
     Route::middleware(['auth', 'verified','role:admin'])->group(function () {
         Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/user-logout', 'user_logout')->name('user_logout');
     });
 });
 

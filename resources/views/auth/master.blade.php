@@ -43,9 +43,7 @@
     <!-- SweetAlert2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
   </head>
-
   <body>
-
     @yield('content')
     <script src="{{ asset('backend/lib/jquery/jquery.js') }}"></script>
     <script src="{{ asset('backend/lib/popper.js/popper.js') }}"></script>
