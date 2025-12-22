@@ -31,8 +31,13 @@
 							</div>
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="images/user.svg" alt=""></div>
-								<div><a href="{{ route('register') }}">Register</a></div>
-								<div><a href="{{ route('login') }}">Sign in</a></div>
+                                @if(Auth::check())
+                                    <div><a href="">My Account</a></div>
+								    <div><a href="{{ route('user_logout') }}">Log Out</a></div>
+                                @else
+                                    <div><a href="{{ route('register') }}">Register</a></div>
+								    <div><a href="{{ route('login') }}">Sign in</a></div>
+                                @endif
 							</div>
 						</div>
 					</div>
@@ -45,14 +50,12 @@
 		<div class="header_main">
 			<div class="container">
 				<div class="row">
-
 					<!-- Logo -->
 					<div class="col-lg-2 col-sm-3 col-3 order-1">
 						<div class="logo_container">
 							<div class="logo"><a href="#">OneTech</a></div>
 						</div>
 					</div>
-
 					<!-- Search -->
 					<div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
 						<div class="header_search">
@@ -80,7 +83,6 @@
 							</div>
 						</div>
 					</div>
-
 					<!-- Wishlist -->
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
@@ -91,7 +93,6 @@
 									<div class="wishlist_count">115</div>
 								</div>
 							</div>
-
 							<!-- Cart -->
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">

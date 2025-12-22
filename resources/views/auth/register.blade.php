@@ -77,6 +77,33 @@
                         confirmButtonText: 'OK'
                     })
                 }
+                else{
+                    $.ajax({
+                        method:'post',
+                        url:'/new-account',
+                        data:{
+                            name:name,
+                            email:email,
+                            password:password,
+                            repassword:repassword,
+                        },
+                        headers:{
+                            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+                        },
+                        success:function(response){
+                            if (response.data == 0) {
+                                Swal.fire({
+                                title: 'Error!',
+                                text: 'Sorry This email already Exists',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                                })
+                            }else if(response.data == 1){
+                                window.location.href="/";
+                            }
+                        }
+                    })
+                }
                 })
             });
     </script>

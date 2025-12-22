@@ -13,7 +13,12 @@ class BackendController extends Controller
     {
         return view('backend.index');
     } // end method
-    public function user_logout()
+/*
+|--------------------------------------------------------------------------------------------
+|                          Admin Logout
+|--------------------------------------------------------------------------------------------
+*/
+    public function admin_logout()
     {
         Auth::logout();
         Session::flush();

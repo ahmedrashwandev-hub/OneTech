@@ -29,13 +29,26 @@ Route::get('/', function () {
 Route::controller(FrontendController::class)->group(function(){
     Route::get('/', 'home')->name('home');
     Route::any('/user/login', 'user_login');
+    Route::any('/new-account', 'new_account');
     Route::any('/user/register', 'user_register')->name('user_register');
+    Route::get('/user/forget-password', 'user_forget_password')->name('user_forget_password');
+    Route::any('/user/reset-password', 'user_reset_password')->name('user_reset_password');
+    Route::get('/user/update-password/{id}', 'user_update_password')->name('user.update.password');
+
+
+
+
+
+    Route::middleware(['auth', 'verified','role:user'])->group(function () {
+        Route::get('/user-logout', 'user_logout')->name('user_logout');
+    });
+
 });
 
 Route::controller(BackendController::class)->group(function(){
     Route::middleware(['auth', 'verified','role:admin'])->group(function () {
         Route::get('/dashboard', 'dashboard')->name('dashboard');
-        Route::get('/user-logout', 'user_logout')->name('user_logout');
+        Route::get('/admin-logout', 'admin_logout')->name('admin_logout');
     });
 });
 
