@@ -89,7 +89,7 @@ class FrontendController extends Controller
 |                          User forget Password
 |--------------------------------------------------------------------------------------------
 */
-    public function user_forget_password()
+    public function user_forgot_password()
     {
         return view('auth.forgot-password');
     }
@@ -122,8 +122,68 @@ class FrontendController extends Controller
 */
     public function user_update_password($id)
     {
-        $userID = $id;
+        $userID = User::FindOrFail($id);
         return view('auth.update_password',compact('userID'));
+    }
+/*
+|--------------------------------------------------------------------------------------------
+|                          User updated New Password
+|--------------------------------------------------------------------------------------------
+*/
+    public function user_updated_password(Request $request)
+    {
+        if($request->isMethod('post')){
+            $user = User::where('id', '=', $request->userID)->update([
+                'password' => Hash::make($request->password),
+            ]);
+            return response()->json(['data' => $user]);
+        }else{
+            return redirect()->route('home');
+        }
+    }
+/*
+|--------------------------------------------------------------------------------------------
+|                          Handel 404 Error
+|--------------------------------------------------------------------------------------------
+*/
+    public function error_404(Request $request)
+    {
+        if(Auth::check()){
+            if (Auth::user()->hasRole('admin')) {
+
+                return redirect()->route('dashboard');
+
+            }elseif (Auth::user()->hasRole('user')) {
+
+                return redirect()->route('home');
+            }else{
+                return redirect()->route('home');
+            }
+        }else{
+            return redirect()->route('home');
+        }
+    }
+/*
+|--------------------------------------------------------------------------------------------
+|                          Handel 403 Error
+|--------------------------------------------------------------------------------------------
+*/
+    public function error_403(Request $request)
+    {
+        if(Auth::check()){
+            if (Auth::user()->hasRole('admin')) {
+
+                return redirect()->route('dashboard');
+
+            }elseif (Auth::user()->hasRole('user')) {
+
+                return redirect()->route('home');
+            }else{
+                return redirect()->route('home');
+            }
+        }else{
+            return redirect()->route('home');
+        }
     }
 /*
 |--------------------------------------------------------------------------------------------

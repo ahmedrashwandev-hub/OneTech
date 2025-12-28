@@ -1,5 +1,5 @@
 @extends('auth.master')
-@section('title', 'login')
+@section('title', 'Update Password')
 @section('content')
     <div class="d-flex align-items-center justify-content-center bg-sl-primary ht-100v">
 
@@ -10,10 +10,14 @@
         <form method="POST" action="{{ url('/user/login') }}">
             @csrf
             <div class="form-group">
-                <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Enter New Password">
             </div><!-- form-group -->
+            <div class="form-group">
+                <input type="password" id="repassword" name="repassword" class="form-control" placeholder="Enter your Password Again">
+            </div><!-- form-group -->
+            <input type="hidden" id="userID" value="{{ $userID->id }}">
             <br><br>
-            <button type="submit" class="btn btn-info btn-block loginbtn">Sign In</button>
+            <button type="submit" class="btn btn-info btn-block UpdatePasswordbtn">Update Password</button>
         </form>
 
         <div class="mg-t-60 tx-center">Not yet a member? <a href="{{ route('register') }}" class="tx-info">Sign Up</a></div>
@@ -23,45 +27,58 @@
 @section('js')
     <script>
         $(document).ready(function(){
-            $('.loginbtn').click(function(e){
+            $('.UpdatePasswordbtn').click(function(e){
                 e.preventDefault();
 
-                let email = $('#email').val();
+                let password   = $('#password').val();
+                let repassword = $('#repassword').val();
+                let userID     = $('#userID').val();
 
-                if(email == ''){
+
+
+                if(password == ''){
                     Swal.fire({
                         title: 'Error!',
-                        text: 'Plz enter your email',
+                        text: 'Plz enter your password',
+                        icon: 'error',
+                        confirmButtonText: 'ok'
+                    });
+                }else if(repassword == ''){
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Plz enter your RepeatPassword',
+                        icon: 'error',
+                        confirmButtonText: 'ok'
+                    });
+
+                }else if(password != repassword){
+                    Swal.fire({
+                        title: 'Error!',
+                        text: 'Passwords do not match',
                         icon: 'error',
                         confirmButtonText: 'ok'
                     });
                 }else{
                     $.ajax({
                         method: 'POST',
-                        url: '/user/reset-password',
+                        url: '/user/updated-password',
                         data: {
-                            email: email,
+                            userID: userID,
+                            password: password
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         success: function(response){
-                            if(response.data == 0){
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Invalid email address',
-                                    icon: 'error',
-                                    confirmButtonText: 'ok'
-                                });
-                            }else{
+                            if(response.data == 1){
                                 Swal.fire({
                                     title: 'Success!',
-                                    text: 'Password reset link has been sent to your email',
+                                    text: 'Password updated successfully',
                                     icon: 'success',
                                     confirmButtonText: 'ok'
                                 });
+                                window.location.href = '/user/login';
                             }
-                            console.log(response);
                         },
                     });
                 }

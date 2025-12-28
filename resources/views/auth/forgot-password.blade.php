@@ -7,7 +7,7 @@
         <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">starlight <span class="tx-info tx-normal">admin</span></div>
         <div class="tx-center mg-b-60">Professional Admin Template Design</div>
 
-        <form method="POST" action="{{ url('/user/login') }}">
+        <form method="POST" action="{{ url('/user/reset-password') }}">
             @csrf
             <div class="form-group">
                 <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email">
@@ -23,12 +23,12 @@
 @section('js')
     <script>
         $(document).ready(function(){
-            $('.loginbtn').click(function(e){
+            $('.loginbtn').on('click', function(e){
                 e.preventDefault();
 
                 let email = $('#email').val();
 
-                if(email == ''){
+                if(email.trim() == ''){
                     Swal.fire({
                         title: 'Error!',
                         text: 'Plz enter your email',
@@ -60,6 +60,7 @@
                                     icon: 'success',
                                     confirmButtonText: 'ok'
                                 });
+                                window.location.href = '/user/login';
                             }
                             console.log(response);
                         },

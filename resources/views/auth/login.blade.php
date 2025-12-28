@@ -14,7 +14,7 @@
             </div><!-- form-group -->
             <div class="form-group">
                 <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">
-                <a href="{{ route('user_forget_password') }}" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
+                <a href="{{ route('user.forgot.password') }}" class="tx-info tx-12 d-block mg-t-10">Forgot password?</a>
             </div><!-- form-group -->
             <button type="submit" class="btn btn-info btn-block loginbtn">Sign In</button>
         </form>

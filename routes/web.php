@@ -31,9 +31,12 @@ Route::controller(FrontendController::class)->group(function(){
     Route::any('/user/login', 'user_login');
     Route::any('/new-account', 'new_account');
     Route::any('/user/register', 'user_register')->name('user_register');
-    Route::get('/user/forget-password', 'user_forget_password')->name('user_forget_password');
-    Route::any('/user/reset-password', 'user_reset_password')->name('user_reset_password');
+    Route::get('/user/forgot-password', 'user_forgot_password')->name('user.forgot.password');
+    Route::any('/user/reset-password', 'user_reset_password')->name('user.reset.password');
     Route::get('/user/update-password/{id}', 'user_update_password')->name('user.update.password');
+    Route::post('/user/updated-password', 'user_updated_password');
+    Route::get('/error-404', 'error_404')->name('error.404');
+    Route::get('/error-403', 'error_403')->name('error.403');
 
 
 
