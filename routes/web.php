@@ -51,6 +51,8 @@ Route::controller(FrontendController::class)->group(function(){
 Route::controller(BackendController::class)->group(function(){
     Route::middleware(['auth', 'verified','role:admin'])->group(function () {
         Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/add-category', 'add_category')->name('add.category');
+        Route::post('/add-category/store', 'add_category_store');
         Route::get('/admin-logout', 'admin_logout')->name('admin_logout');
     });
 });
