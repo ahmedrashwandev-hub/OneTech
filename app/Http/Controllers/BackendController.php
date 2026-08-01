@@ -8,7 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-
+/*
+|--------------------------------------------------------------------------------------------
+|                          Add Category By Admin
+|--------------------------------------------------------------------------------------------
+*/
 class BackendController extends Controller
 {
     public function dashboard()
@@ -24,8 +28,19 @@ class BackendController extends Controller
 */
     public function add_category()
     {
-        return view('backend.categories.add');
+        return view('backend.categories.index');
     }
+/*
+|--------------------------------------------------------------------------------------------
+|                          View Category in Admin dashboard
+|--------------------------------------------------------------------------------------------
+*/
+    public function category()
+    {
+        $data = Category::latest()->paginate(10);
+        return view('backend.categories.index',compact('data'));
+    }
+
 /*
 |--------------------------------------------------------------------------------------------
 |                          Add Category by admin to database
