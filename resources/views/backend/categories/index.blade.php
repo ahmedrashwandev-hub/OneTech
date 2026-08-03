@@ -32,7 +32,7 @@
                                 <td>{{ $val->name }}</td>
                                 <td>{{ $val->order }}</td>
                                 <td>
-                                    <a href="" class="btn btn-outline-primary btn-block mg-b-10">Edit</a>
+                                    <a href="{{ route('category.edit', ['id' => $val->id]) }}" class="btn btn-outline-primary btn-block mg-b-10">Edit</a>
                                     <button class="btn btn-outline-danger btn-block mg-b-10">Delete</button>
                                 </td>
                             </tr>

@@ -72,6 +72,32 @@ class BackendController extends Controller
 |                          Admin Logout
 |--------------------------------------------------------------------------------------------
 */
+public function category_edit($id)
+{
+    $data = Category::findOrFail($id);
+    return view('backend.categories.edit',compact('data'));
+}
+
+/*
+|--------------------------------------------------------------------------------------------
+|                          Admin Logout
+|--------------------------------------------------------------------------------------------
+*/
+public function category_update(Request $request)
+{
+    $data = Category::where('id', '=', $request->id)->update([
+        'name'  => strip_tags($request->name),
+        'order' => strip_tags($request->order)
+    ]);
+    return response()->json(['data' => $data ]);
+}
+
+
+/*
+|--------------------------------------------------------------------------------------------
+|                          Admin Logout
+|--------------------------------------------------------------------------------------------
+*/
     public function admin_logout()
     {
         Auth::logout();
