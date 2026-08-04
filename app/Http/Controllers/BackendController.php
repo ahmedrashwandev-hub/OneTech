@@ -91,7 +91,16 @@ public function category_update(Request $request)
     ]);
     return response()->json(['data' => $data ]);
 }
-
+/*
+|--------------------------------------------------------------------------------------------
+|                          Admin Logout
+|--------------------------------------------------------------------------------------------
+*/
+public function category_delete(Request $request)
+{
+    $data = Category::where('id', '=', $request->id)->delete();
+    return response()->json(['data' => $data ]);
+}
 
 /*
 |--------------------------------------------------------------------------------------------

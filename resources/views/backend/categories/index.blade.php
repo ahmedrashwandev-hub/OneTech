@@ -33,7 +33,7 @@
                                 <td>{{ $val->order }}</td>
                                 <td>
                                     <a href="{{ route('category.edit', ['id' => $val->id]) }}" class="btn btn-outline-primary btn-block mg-b-10">Edit</a>
-                                    <button class="btn btn-outline-danger btn-block mg-b-10">Delete</button>
+                                    <button class="btn btn-outline-danger btn-block mg-b-10 delCate" data-id="{{ $val->id }}">Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -44,4 +44,43 @@
             </div><!-- sl-pagebody -->
         </div><!-- sl-mainpanel -->
     <!-- ########## END: MAIN PANEL ########## -->
+@endsection
+
+
+@section('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+
+            $('.delCate').click(function(e){
+                e.preventDefault();
+
+                let id = $(this).data('id');
+
+                Swal.fire({
+                    title: 'Warning!',
+                    text: 'Do you want to Delete this Category?',
+                    icon: 'warning',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if(result.isConfirmed){
+                        $.ajax({
+                            method: 'POST',
+                            url:'/category/delete',
+                            data: {
+                                id: id
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success:function(response){
+                                if(response.data == 1){
+                                    window.location.reload();
+                                }
+                            }
+                        });
+                    }
+                })
+            });
+        })
+    </script>
 @endsection
