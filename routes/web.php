@@ -58,6 +58,11 @@ Route::controller(BackendController::class)->group(function(){
         Route::post('/add-category/update', 'category_update')->name('category.update');
         Route::post('/category/delete', 'category_delete')->name('category.delete');
         Route::get('/admin-logout', 'admin_logout')->name('admin_logout');
+
+
+        Route::get('/products/add', 'add_product')->name('add.product');
+        Route::get('/products/view', 'view_product')->name('view.product');
+
     });
 });
 

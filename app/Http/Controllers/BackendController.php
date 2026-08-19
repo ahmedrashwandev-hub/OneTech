@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-
 /*
 |--------------------------------------------------------------------------------------------
 |                          Add Category By Admin
@@ -20,7 +19,24 @@ class BackendController extends Controller
         return view('backend.index');
     }
 
-
+/*
+|--------------------------------------------------------------------------------------------
+|                          Add Product By Admin
+|--------------------------------------------------------------------------------------------
+*/
+    public function add_product()
+    {
+        return view('backend.products.add');
+    }
+/*
+|--------------------------------------------------------------------------------------------
+|                          View Product By Admin
+|--------------------------------------------------------------------------------------------
+*/
+    public function view_product()
+    {
+        return view('backend.products.index');
+    }
 /*
 |--------------------------------------------------------------------------------------------
 |                          Add Category By Admin
