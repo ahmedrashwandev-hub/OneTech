@@ -28,7 +28,7 @@ class BackendController extends Controller
 */
     public function add_category()
     {
-        return view('backend.categories.index');
+        return view('backend.categories.add');
     }
 /*
 |--------------------------------------------------------------------------------------------

@@ -56,11 +56,7 @@ Route::controller(BackendController::class)->group(function(){
         Route::get('/category', 'category')->name('category');
         Route::get('/category-edit/{id}', 'category_edit')->name('category.edit');
         Route::post('/add-category/update', 'category_update')->name('category.update');
-
         Route::post('/category/delete', 'category_delete')->name('category.delete');
-
-
-
         Route::get('/admin-logout', 'admin_logout')->name('admin_logout');
     });
 });
